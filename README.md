@@ -1,6 +1,11 @@
 # jj
-Just some personal little math helpers
+Just some rough, untested personal little math helpers
 
+# Minified:
+`
+var jj={lerp:function(t,n,i){return t+(n-t)*i},clamp:function(t,n,i){return Math.min(i,Math.max(n,value))},rand:function(t,n){return this.lerp(t,n,Math.random())},randi:function(t,n){return Math.floor(this.lerp(t,n,Math.random()))},randv:function(t){return new vec(this.rand(-t,t),this.rand(-t,t))}};function vec(t,n){this.x=t||0,this.y=n||0,this.fromPolar=function(){return new vec(Math.sin(this.x)*this.y,Math.cos(this.x)*this.y)},this.mult=function(t){return new vec(this.x*t,this.y*t)},this.div=function(t){return this.mult(1/t)},this.add=function(t,n){return isNaN(t)?new vec(this.x+t.x,this.y+t.y):new vec(this.x+t,this.y+n)},this.neg=function(t,n){return t||n?isNaN(t)?new vec(this.x-t.x,this.y-t.y):new vec(this.x-t,this.y-n):this.mult(-1)},this.normalize=function(){var t=Math.sqrt(this.x*this.x+this.y*this.y);0===t?(this.x=0,this.y=0):(this.x/=t,this.y/=t)}}vec.lerp=function(t,n,i){return new vec(t.x+(n.x-t.x)*i,t.y+(n.y-t.y)*i)},vec.distance=function(t,n){return Math.sqrt(Math.pow(t.x-n.x,2)+Math.pow(t.y-n.y,2))},Array.prototype.randomElement=function(){return this[jj.randi(0,this.length)]};
+`
+# Source:
 ```js
 var jj = {
     lerp: function (a, b, f) {
