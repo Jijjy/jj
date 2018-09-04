@@ -3,7 +3,7 @@ var jj = {
         return a + (b - a) * f;
     },
     clamp: function (f, min, max) {
-        return Math.min(max, Math.max(min, value));
+        return Math.min(max, Math.max(min, f));
     },
     rand: function (min, max) {
         return this.lerp(min, max, Math.random());
