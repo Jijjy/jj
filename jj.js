@@ -20,7 +20,7 @@ function vec(x, y) {
     this.x = x || 0;
     this.y = y || 0;
 
-    function _arg2v(args) {
+    this._arg2v = function (args) {
         return args.length === 2 ? new vec(args[0], args[1]) : args.length === 1 ? args[0] : new vec();
     }
     this.mult = function (m) {
@@ -30,12 +30,12 @@ function vec(x, y) {
         return this.mult(1 / m);
     };
     this.add = function () {
-        let v = _arg2v(arguments);
+        let v = this._arg2v(arguments);
         return new vec(this.x + v.x, this.y + v.y)
     };
     this.neg = function () {
         if (arguments.length === 0) return this.mult(-1);
-        let v = _arg2v(arguments);
+        let v = this._arg2v(arguments);
         new vec(this.x - v.x, this.y - v.y);
     };
     this.magnitude = function () {
