@@ -27,7 +27,7 @@ function vec(x, y) {
         return new vec(this.x * m, this.y * m);
     };
     this.div = function (m) {
-        return this.mult(1 / m);
+        return new vec(this.x / m, this.y / m);
     };
     this.add = function () {
         let v = this._arg2v(arguments);
@@ -36,14 +36,13 @@ function vec(x, y) {
     this.neg = function () {
         if (arguments.length === 0) return this.mult(-1);
         let v = this._arg2v(arguments);
-        new vec(this.x - v.x, this.y - v.y);
+        return new vec(this.x - v.x, this.y - v.y);
     };
     this.magnitude = function () {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     };
     this.normalized = function () {
-        var m = this.magnitude();
-        return (m === 0) ? new vec() : new vec(this.x / m, this.y / m);
+        return this.div(this.magnitude() || 1);
     };
 }
 
