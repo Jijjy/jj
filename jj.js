@@ -57,6 +57,7 @@ vec.polar = function (angle, radius) {
 }
 
 vec.poly = function (radius, numSides, orientation) {
+    orientation = orientation || 0;
     var points = [];
     var angle = 2 * Math.PI / numSides;
     for (let i = 0; i < numSides; i++) {
