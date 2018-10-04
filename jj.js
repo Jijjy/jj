@@ -20,9 +20,6 @@ function vec(x, y) {
     this.x = x || 0;
     this.y = y || 0;
 
-    this._arg2v = function (args) {
-        return args.length === 2 ? new vec(args[0], args[1]) : args.length === 1 ? args[0] : new vec();
-    }
     this.mult = function (m) {
         return new vec(this.x * m, this.y * m);
     };
@@ -30,13 +27,14 @@ function vec(x, y) {
         return new vec(this.x / m, this.y / m);
     };
     this.add = function () {
-        let v = this._arg2v(arguments);
-        return new vec(this.x + v.x, this.y + v.y)
+        if (arguments.length === 1)
+            return new vec(this.x + arguments[0].x, this.y + arguments[0].y);
+        return new vec(this.x + arguments[0], this.y + arguments[1]);
     };
     this.neg = function () {
-        if (arguments.length === 0) return this.mult(-1);
-        let v = this._arg2v(arguments);
-        return new vec(this.x - v.x, this.y - v.y);
+        if (arguments.length === 1) return new vec(arguments[0].x, arguments[0].y);
+        if (arguments.length === 2) return new vec(arguments[0], arguments[1]);
+        return this.mult(-1);
     };
     this.magnitude = function () {
         return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -54,8 +52,17 @@ vec.distance = function (a, b) {
     return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 };
 
-vec.polar = function (a, r) {
-    return new vec(Math.sin(a) * r, Math.cos(a) * r);
+vec.polar = function (angle, radius) {
+    return new vec(Math.sin(angle) * radius, Math.cos(angle) * radius);
+}
+
+vec.poly = function (radius, numSides, orientation) {
+    var points = [];
+    var angle = 2 * Math.PI / numSides;
+    for (let i = 0; i < numSides; i++) {
+        points.push(vec.polar(i * angle + orientation * angle, radius));
+    }
+    return points;
 }
 
 Array.prototype.randomElement = function () {
