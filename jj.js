@@ -13,6 +13,11 @@ var jj = {
     },
     randv: function (len) {
         return new vec(this.rand(-len, len), this.rand(-len, len));
+    },
+    range: function (n, cbk) {
+        let result = [];
+        for (let i = 0; i < n; i++) result.push(cbk ? cbk(n) : n);
+        return result;
     }
 };
 
